@@ -6,9 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * SRP: owns only movie storage and retrieval.
- */
+
 public class MovieService {
 
     private final Map<String, Movie> movieDB = new HashMap<>();

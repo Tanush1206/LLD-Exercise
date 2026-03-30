@@ -7,15 +7,7 @@ import bookmyshow.models.ShowSeat;
 
 import java.time.DayOfWeek;
 
-/**
- * Decorator over any PricingStrategy.
- * Applies surcharges based on show-level rules:
- *   - Weekend (Sat/Sun)   → +20%
- *   - Premium screen type → +15%
- *
- * OCP: new surcharge rules = new decorator, no changes to existing classes.
- * LSP: substitutes BasePricingStrategy cleanly wherever PricingStrategy is expected.
- */
+
 public class DynamicPricingStrategy implements PricingStrategy {
 
     private final PricingStrategy base;

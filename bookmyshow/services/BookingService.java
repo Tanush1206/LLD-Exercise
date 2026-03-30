@@ -11,20 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Core booking orchestrator.
- *
- * SRP : manages only the booking lifecycle (lock → pay → confirm/rollback).
- * DIP : depends on PaymentGateway interface — any gateway can be injected.
- * OCP : new payment providers require zero changes here.
- *
- * Booking flow:
- *   1. Lock each requested ShowSeat atomically.
- *   2. Create a PENDING Booking.
- *   3. Delegate payment to the injected PaymentGateway.
- *   4a. On success → confirm booking + seats.
- *   4b. On failure → cancel booking, release seats.
- */
+
 public class BookingService {
 
     private final Map<String, Booking> bookingDB      = new HashMap<>();
@@ -32,24 +19,11 @@ public class BookingService {
     private final PaymentGateway       paymentGateway;
     private final AtomicInteger        counter        = new AtomicInteger(1);
 
-    /** Constructor injection — satisfies DIP. */
     public BookingService(ShowService showService, PaymentGateway paymentGateway) {
         this.showService    = showService;
         this.paymentGateway = paymentGateway;
     }
 
-    /**
-     * Books tickets for a user.
-     *
-     * @param user    the customer
-     * @param showId  target show
-     * @param seatIds seats the user selected
-     * @param mode    payment mode chosen at checkout
-     * @return a confirmed Booking
-     * @throws IllegalArgumentException if the show does not exist
-     * @throws IllegalStateException    if any seat is already taken
-     * @throws RuntimeException         if payment fails
-     */
     public Booking bookTickets(User user, String showId,
                                List<String> seatIds, PaymentMode mode) {
 

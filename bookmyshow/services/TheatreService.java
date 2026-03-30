@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * SRP: owns only theatre storage and city-based lookup.
- */
+
 public class TheatreService {
 
     private final Map<String, Theatre> theatreDB = new HashMap<>();

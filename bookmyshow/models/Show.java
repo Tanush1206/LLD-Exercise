@@ -10,10 +10,6 @@ public class Show {
     private final Screen                 screen;
     private final LocalDateTime          startTime;
 
-    /**
-     * showSeatMap: seatId → ShowSeat
-     * One ShowSeat per physical seat in the screen, created eagerly on construction.
-     */
     private final Map<String, ShowSeat> showSeatMap;
 
     public Show(String showId, Movie movie, Screen screen, LocalDateTime startTime) {

@@ -26,14 +26,12 @@ public class Booking {
                                .sum();
     }
 
-    /** Called by BookingService after payment succeeds. */
     public void confirm(Payment payment) {
         this.payment = payment;
         this.status  = BookingStatus.CONFIRMED;
         bookedSeats.forEach(ShowSeat::confirm);
     }
 
-    /** Called on cancellation — releases all locked/booked seats. */
     public void cancel() {
         this.status = BookingStatus.CANCELLED;
         bookedSeats.forEach(ShowSeat::release);

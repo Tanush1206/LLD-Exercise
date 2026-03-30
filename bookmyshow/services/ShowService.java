@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * SRP: owns show lifecycle and seat availability.
- * DIP: depends on PricingStrategy interface, not a concrete impl.
- */
+
 public class ShowService {
 
     private final Map<String, Show> showDB          = new HashMap<>();
@@ -23,9 +20,6 @@ public class ShowService {
         this.pricingStrategy = pricingStrategy;
     }
 
-    /**
-     * Persists a show and eagerly prices every ShowSeat using the injected strategy.
-     */
     public Show addShow(Show show) {
         show.getShowSeatMap().values()
                 .forEach(ss -> ss.setPrice(pricingStrategy.calculatePrice(ss)));
@@ -45,14 +39,12 @@ public class ShowService {
         return showDB.values();
     }
 
-    /** All shows screening a particular movie. */
     public List<Show> getShowsForMovie(String movieId) {
         return showDB.values().stream()
                 .filter(s -> s.getMovie().getMovieId().equals(movieId))
                 .collect(Collectors.toList());
     }
 
-    /** Seats that are neither booked nor temporarily locked. */
     public List<ShowSeat> getAvailableSeats(String showId) {
         Show show = showDB.get(showId);
         if (show == null) throw new IllegalArgumentException("Show not found: " + showId);

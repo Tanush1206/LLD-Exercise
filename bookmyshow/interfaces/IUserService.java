@@ -4,10 +4,7 @@ import bookmyshow.enums.PaymentMode;
 import bookmyshow.models.*;
 import java.util.List;
 
-/**
- * ISP fix: exposes only operations a customer-facing client needs.
- * Admin operations are in IAdminService.
- */
+
 public interface IUserService {
     List<Movie>    listMoviesInCity(String cityId);
     List<Theatre>  listTheatresInCity(String cityId);

@@ -14,15 +14,6 @@ import bookmyshow.services.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Single entry-point for both the admin and user layers.
- *
- * ISP  : implements IAdminService and IUserService separately —
- *        admin clients depend only on IAdminService,
- *        user clients depend only on IUserService.
- * DIP  : services are constructed with interfaces injected;
- *        default wiring lives here (swap in tests or config).
- */
 public class BookMyShowFacade implements IUserService, IAdminService {
 
     private final MovieService   movieService;

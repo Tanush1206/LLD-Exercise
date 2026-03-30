@@ -18,11 +18,9 @@ public class Main {
 
         BookMyShowFacade bms = new BookMyShowFacade();
 
-        // Cast to role-specific interfaces — ISP in action
         IAdminService admin = bms;
         IUserService  user  = bms;
 
-        // ── Admin: seed data ──────────────────────────────────
 
         City bangalore = new City("CITY-1", "Bangalore");
 
@@ -42,11 +40,9 @@ public class Main {
         pvr.addScreen(screen);
         admin.addTheatre(pvr);
 
-        // Sunday evening → dynamic pricing applies (+20% weekend, +15% IMAX)
         LocalDateTime showTime = LocalDateTime.of(2026, 4, 5, 18, 30);
         admin.addShow(new Show("SHOW-1", movie, screen, showTime));
 
-        // ── User: browse ──────────────────────────────────────
 
         System.out.println("=== Movies in Bangalore ===");
         user.listMoviesInCity("CITY-1")
@@ -67,7 +63,6 @@ public class Main {
                 ss.getSeat().getSeatType(),
                 ss.getPrice()));
 
-        // ── User: book ────────────────────────────────────────
 
         User arjun = new User("USR-1", "Arjun", "arjun@mail.com", "9876543210");
         List<String> chosen = Arrays.asList("A1", "A2");
@@ -80,7 +75,6 @@ public class Main {
         System.out.println("  Payment    : " + booking.getPayment().getMode()
                            + " — " + booking.getPayment().getStatus());
 
-        // ── Double-book guard ─────────────────────────────────
 
         System.out.println("\n=== Re-booking A1 (should fail) ===");
         try {
@@ -89,7 +83,6 @@ public class Main {
             System.out.println("  Caught: " + e.getMessage());
         }
 
-        // ── Cancel ────────────────────────────────────────────
 
         System.out.println("\n=== Cancelling booking ===");
         user.cancelBooking(booking.getBookingId());

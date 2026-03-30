@@ -7,10 +7,7 @@ import bookmyshow.models.ShowSeat;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * Returns a flat base price depending on seat type.
- * Admin can subclass or wrap this to change floor prices.
- */
+
 public class BasePricingStrategy implements PricingStrategy {
 
     private final Map<SeatType, Double> basePriceMap;
