@@ -1,14 +1,17 @@
 public class TransportBookingService {
     // DIP violation: direct concretes
-    private final DistanceService dist ; 
-    private final DriverService alloc ; 
-    private final PaymentService pay ;
+    DistanceCal dist;
+    DriverAllocator alloc;
+    PaymentGateway pay;
 
-    public TransportBookingService(DistanceService dist, DriverService alloc, PaymentService pay) {
-        this.dist = dist; this.alloc = alloc; this.pay = pay;
+    public TransportBookingService(DistanceCal dist, DriverAllocator alloc, PaymentGateway pay) {
+        this.dist = dist;
+        this.alloc = alloc;
+        this.pay = pay;
     }
 
     public void book(TripRequest req) {
+
         double km = dist.km(req.from, req.to);
         System.out.println("DistanceKm=" + km);
 

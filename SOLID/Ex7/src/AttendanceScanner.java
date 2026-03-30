@@ -1,10 +1,3 @@
-public class AttendanceScanner implements PowerDevice, AttendanceDevice {
-
-    public void powerOn() {}
-
-    public void powerOff() {}
-
-    public int scanAttendance() {
-        return 3;
-    }
+public class AttendanceScanner implements  AttendanceController{
+    @Override public int scanAttendance() { return 3; }
 }

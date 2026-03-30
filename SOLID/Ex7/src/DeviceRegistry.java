@@ -1,16 +1,16 @@
 import java.util.*;
 
 public class DeviceRegistry {
-    private final List<Object> devices = new ArrayList<>();
+    private final java.util.List<Object> devices = new ArrayList<>();
 
-    public void add(Object d) { devices.add(d); }
+    public void add(Object device) { devices.add(device); }
 
-    public <T> T getDevice(Class<T> clazz){
-        for (Object d : devices){
-            if(clazz.isInstance(d)){
-                return clazz.cast(d);
-            }
+    public <T> T getByCapabilities(Class<T> capability) {
+    for (Object d : devices) {
+        if (capability.isInstance(d)) {
+            return capability.cast(d);
         }
-        throw new IllegalStateException("Missing: " + clazz.getSimpleName());
     }
+    throw new IllegalStateException("Missing device for " + capability.getSimpleName());
+}
 }

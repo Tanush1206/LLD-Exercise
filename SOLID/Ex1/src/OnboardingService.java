@@ -1,44 +1,45 @@
 import java.util.*;
 
 public class OnboardingService {
+    private final StudentRepo repo;
+    private final ConsoleOutput console;
 
-    private final StudentRepository db;
-    private final InputParser parser;
-    private final Validator validator;
-    private final OutputPrinter printer;
-
-    public OnboardingService(StudentRepository db) {
-        this.db = db;
-        this.parser = new InputParser();
-        this.validator = new Validator();
-        this.printer = new OutputPrinter();
+    public OnboardingService(StudentRepo repo) { 
+        this.repo = repo;
+        this.console = new ConsoleOutput(repo);
     }
 
+    // Intentionally violates SRP: parses + validates + creates ID + saves + prints.
     public void registerFromRawInput(String raw) {
+        
+        System.out.println("INPUT: " + raw);
 
-        printer.printInput(raw);
+        final StudentParser parser = new StudentParser();
+        StudentInput input = parser.parse(raw);
 
-        Map<String,String> kv = parser.parse(raw);
+        String name = input.getName();
+        String email = input.getEmail();
+        String phone = input.getPhone();
+        String program = input.getProgram();
 
-        ValidationResult result = validator.validate(kv);
+        // validation inline, printing inline
+        final StudentValidator validator = new StudentValidator();
+        List<String> errors = validator.validate(input);
 
-        if (!result.isValid()) {
-            printer.printErrors(result.getErrors());
+        if (!errors.isEmpty()) {
+            System.out.println("ERROR: invalid input");
+            for (String e : errors) {
+                System.out.println("  " + e);
+            }
             return;
         }
 
-        String id = IdUtil.nextStudentId(db.count());
+        String id = IdUtil.nextStudentId(repo.count());
+        StudentRecord rec = new StudentRecord(id, name, email, phone, program);
 
-        StudentRecord rec = new StudentRecord(
-                id,
-                kv.get("name"),
-                kv.get("email"),
-                kv.get("phone"),
-                kv.get("program")
-        );
-
-        db.save(rec);
-
-        printer.printSuccess(rec, db.count());
+        repo.save(rec);
+        
+        console.printSuccessful(rec);
+        console.printDbDump();
     }
 }

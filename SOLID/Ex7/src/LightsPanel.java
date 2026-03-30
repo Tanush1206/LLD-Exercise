@@ -1,13 +1,7 @@
-public class LightsPanel implements PowerDevice, LightDevice {
-    public void powerOn(){
+public class LightsPanel implements PowerController, BrightnessController {
+    @Override public void powerOn() { /* always on */ }
+    @Override public void powerOff() { System.out.println("Lights OFF"); }
 
-    }
-
-    public void powerOff(){
-        System.out.println("Lights OFF");
-    }
-
-    public void setBrightness(int pct){
-        System.out.println("Lights brightness set to " + pct + "%");
-    }
+    @Override public void setBrightness(int pct) { System.out.println("Lights set to " + pct + "%"); } 
+    
 }
