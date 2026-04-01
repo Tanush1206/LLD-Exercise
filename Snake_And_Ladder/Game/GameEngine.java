@@ -1,42 +1,43 @@
-package Snake_And_Ladder.Game ; 
+package Snake_And_Ladder.Game;
 
-import java.util* ;
-import Snake_And_Ladder.Board.Board ;
-import Snake_And_Ladder.Dices.Dice ;
-import Snake_And_Ladder.Player.Player ;
+import java.util.Queue;
+
+import Snake_And_Ladder.Board.Board;
+import Snake_And_Ladder.Dices.Dice;
+import Snake_And_Ladder.Player.Player;
 
 public class GameEngine {
-    private final Board ; 
-    private final Dice dice ; 
-    private final Queue<Player> players ; 
+    private final Board board;
+    private final Dice dice;
+    private final Queue<Player> players;
 
-    public GameEngine(Board board , Dice dice , Queue<Player> players){
-        this.board = board ; 
-        this.dice = dice ; 
-        this.players = players ;
+    public GameEngine(Board board, Dice dice, Queue<Player> players) {
+        this.board = board;
+        this.dice = dice;
+        this.players = players;
     }
 
-    public void play(){
-        while(players.size() > 1){
-            Player curr = players.poll() ; 
+    public void play() {
+        while (players.size() > 1) {
+            Player current = players.poll();
 
-            int roll = dice.roll() ; 
-            int nextPos = curr.getPostion() + roll() ; 
+            int roll = dice.roll();
+            int nextPos = current.getPosition() + roll;
 
-            if(nextPos > board.getSize()){
-                player.offer(curr) ; 
-                continue ; 
+            if (nextPos > board.getSize()) {
+                players.offer(current);
+                continue;
             }
 
-            nextPos = board.resolveJump(nextPos) ; 
-            curr.setPostion(nextPos) ;
+            nextPos = board.resolveJump(nextPos);
+            current.setPosition(nextPos);
 
-            System.out.println(current.getId() + " rolled " + roll + " -> " + nextPos) ; 
+            System.out.println(current.getId() + " rolled " + roll + " -> " + nextPos);
 
-            if(nextPos == board.getSize()){
-                System.out.println(curr.getId() + " wins! ") ; 
+            if (nextPos == board.getSize()) {
+                System.out.println(current.getId() + " WON!");
             } else {
-                player.offer(curr) ; 
+                players.offer(current);
             }
         }
     }

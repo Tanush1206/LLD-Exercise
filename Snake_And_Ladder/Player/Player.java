@@ -13,11 +13,11 @@ public class Player {
         return id ; 
     }
 
-    public int getPostion(){
+    public int getPosition(){
         return position ; 
     }
 
-    public void setPostion(int position){
+    public void setPosition(int position){
         this.position = position ; 
     }
 }

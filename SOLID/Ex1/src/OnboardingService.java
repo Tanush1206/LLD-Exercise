@@ -9,7 +9,6 @@ public class OnboardingService {
         this.console = new ConsoleOutput(repo);
     }
 
-    // Intentionally violates SRP: parses + validates + creates ID + saves + prints.
     public void registerFromRawInput(String raw) {
         
         System.out.println("INPUT: " + raw);
@@ -22,7 +21,6 @@ public class OnboardingService {
         String phone = input.getPhone();
         String program = input.getProgram();
 
-        // validation inline, printing inline
         final StudentValidator validator = new StudentValidator();
         List<String> errors = validator.validate(input);
 
