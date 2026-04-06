@@ -5,9 +5,7 @@ import DistributedCache.model.CacheEntry;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * LRU eviction policy
- */
+
 public class LRUEvictionPolicy implements EvictionPolicy {
 
     @Override

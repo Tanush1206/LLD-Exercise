@@ -2,9 +2,6 @@ package DistributedCache.cluster;
 
 import DistributedCache.node.CacheNode;
 
-/**
- * Manages cluster of cache nodes
- */
 public class CacheCluster {
 
     private final ConsistentHashing hashing;

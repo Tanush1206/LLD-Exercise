@@ -5,9 +5,6 @@ import DistributedCache.eviction.EvictionPolicy;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * In-memory storage for each node
- */
 public class InMemoryCacheStorage implements CacheStorage {
 
     private final ConcurrentHashMap<String, CacheEntry> store;

@@ -5,9 +5,6 @@ import DistributedCache.node.CacheNode;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-/**
- * Consistent hashing for distributing keys across nodes
- */
 public class ConsistentHashing {
 
     private final SortedMap<Integer, CacheNode> ring = new TreeMap<>();

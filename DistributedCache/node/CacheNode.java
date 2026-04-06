@@ -2,9 +2,7 @@ package DistributedCache.node;
 
 import DistributedCache.storage.CacheStorage;
 
-/**
- * Represents a single cache node
- */
+
 public class CacheNode {
 
     private final String nodeId;

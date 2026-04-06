@@ -3,9 +3,7 @@ package DistributedCache.service;
 import DistributedCache.cluster.CacheCluster;
 import DistributedCache.node.CacheNode;
 
-/**
- * Entry point for cache operations
- */
+
 public class CacheService {
 
     private final CacheCluster cluster;
